@@ -3,10 +3,11 @@ SELECT *
 FROM Genres
 
 -- Using the INSERT statement, add one of your favorite artists to the Artist table.
-
-
+INSERT INTO Artist (ArtistId, ArtistName, YearEstablished)
+VALUES ('31','Dave Matthews Band', '1991')
 -- Using the INSERT statement, add one, or more, albums by your artist to the Album table.
-
+INSERT INTO Album 
+VALUES ('25', 'Under The Table And Dreaming', '9/27/1994' ,'4269')
 -- Using the INSERT statement, add some songs that are on that album to the Song table.
 
 -- Write a SELECT query that provides the song titles, album title, and artist name for all of the data you just entered in. Use the LEFT JOIN keyword sequence to connect the tables, and the WHERE keyword to filter the results to the album and artist you added. Here is some more info on joins that might help.
