@@ -7,10 +7,30 @@ INSERT INTO Artist (ArtistId, ArtistName, YearEstablished)
 VALUES ('31','Dave Matthews Band', '1991')
 -- Using the INSERT statement, add one, or more, albums by your artist to the Album table.
 INSERT INTO Album 
-VALUES ('25', 'Under The Table And Dreaming', '9/27/1994' ,'4269')
+VALUES ('25', 'Under The Table And Dreaming', '9/27/1994' ,'4269', 'RCA', '31', '2')
 -- Using the INSERT statement, add some songs that are on that album to the Song table.
+INSERT INTO Song
+VALUES (null, 'Rhyme & Reason', '257', 1994,
+(SELECT genreId FROM Album a WHERE title = 'Under The Table And Dreaming'),
+(SELECT artistId FROM Album a WHERE title = 'Under The Table And Dreaming'),
+(SELECT albumId FROM Album a WHERE title = 'Under The Table And Dreaming')
+)
 
+INSERT INTO Song
+VALUES (null, 'The Best Of Whats Around', '257', 1994,
+(SELECT genreId FROM Album a WHERE title = 'Under The Table And Dreaming'),
+(SELECT artistId FROM Album a WHERE title = 'Under The Table And Dreaming'),
+(SELECT albumId FROM Album a WHERE title = 'Under The Table And Dreaming')
+)
 -- Write a SELECT query that provides the song titles, album title, and artist name for all of the data you just entered in. Use the LEFT JOIN keyword sequence to connect the tables, and the WHERE keyword to filter the results to the album and artist you added. Here is some more info on joins that might help.
+SELECT s.title as songTitle, a.title as albumTitle, b.artistName
+FROM song s
+LEFT JOIN album a
+ON s.albumid = a.albumid
+LEFT JOIN artist as b
+ON  s.artistId = b.artistId
+WHERE s.albumId = (SELECT albumId FROM album WHERE title = "Under The Table And Dreaming")
+
 
 -- Write a SELECT statement to display how many songs exist for each album. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
 
